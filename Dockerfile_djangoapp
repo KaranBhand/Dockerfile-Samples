@@ -1,0 +1,19 @@
+#Feel free to change the Dockerfile as per your requirement.
+# Use a Python base image
+FROM python:3.9
+
+# Set the working directory
+WORKDIR /app
+
+# Copy requirements and install dependencies
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copy the Django project code
+COPY . .
+
+# Expose port 8000 for the Django app
+EXPOSE 8000
+
+# Run migrations and start the Django development server
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
